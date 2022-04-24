@@ -1,15 +1,9 @@
-/**
- * Sequelize has two forms to define models
- * -Calling sequelize.define(modelName, attributes, options)
- * -Extending Model and calling init(attributes, options)
- */
 import { Model, DataTypes } from "sequelize";
+const PATIENT_TABLE = "patients";
 
-const DOCTOR_TABLE = "doctors";
-
-const DoctorSchema = {
+const PatientSchema = {
   id: {
-    field: "id_doctor",
+    field: "id_patient",
     allowNull: false,
     primaryKey: true,
     type: DataTypes.STRING,
@@ -24,25 +18,26 @@ const DoctorSchema = {
     type: DataTypes.STRING,
     unique: true,
   },
-  password: {
+  phone: {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  phone: {
+  doctorId: {
+    field: "doctor_id",
     allowNull: false,
     type: DataTypes.STRING,
   },
 };
 
-class Doctor extends Model {
+class Patient extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: DOCTOR_TABLE,
-      modelName: "Doctor",
-      timestamps: true,
+      tableName: PATIENT_TABLE,
+      modelName: "Patient",
+      timestamp: true,
     };
   }
 }
 
-export { DOCTOR_TABLE, DoctorSchema, Doctor };
+export { PATIENT_TABLE, PatientSchema, Patient };
